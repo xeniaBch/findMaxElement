@@ -1,45 +1,77 @@
 package maxElement;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+
+import exceptions.EmptyCollectionException;
+import model.Cartesian;
+
+import java.util.*;
 
 public class MaxElement {
 
     //implement collection
 
-    private final List <Integer> friendsList = new ArrayList<>();
-    private final Stack <Integer> elementsStack = new Stack<>();
+    Deque<Cartesian> objectList;
+    Deque<Cartesian> maxDistance;
+    Deque<Cartesian> maxAngle;
 
-    public void addElement(int a) {
+    public MaxElement() {
+        this.objectList = new ArrayDeque<>();
+        this.maxDistance = new ArrayDeque<>();
+        this.maxAngle = new ArrayDeque<>();
+    }
 
-        if(friendsList.isEmpty()){
-            friendsList.add(a);
-            elementsStack.push(a);
+    public void addElement(Cartesian cartesian) {
+
+        if (objectList.isEmpty()) {
+            objectList.addLast(cartesian);
+            maxDistance.addLast(cartesian);
+            maxAngle.addLast(cartesian);
             return;
         }
-        friendsList.add(a);
-        elementsStack.push(Math.max(a, getMax()));
+        objectList.addLast(cartesian);
+
+        if (cartesian.distanceFromCenter() > getMaxDistance()) {
+            maxDistance.addLast(cartesian);
+        } else {
+            maxDistance.addLast(maxDistance.getLast());
+        }
+
+        if (cartesian.angleBetweenDistanceAndOX() > getMaxAngle()) {
+            maxAngle.addLast(cartesian);
+        } else {
+            maxAngle.addLast(maxAngle.getLast());
+        }
+
     }
+
 
     public void removeLast() {
-        friendsList.remove(size()-1);
-        elementsStack.pop();
+        if (objectList.isEmpty()) throw new EmptyCollectionException();
+        objectList.removeLast();
+        maxDistance.removeLast();
+        maxAngle.removeLast();
     }
 
-    public int getLast(){
-       return friendsList.get(size()-1);
+    public Cartesian getLast() {
+        if (objectList.isEmpty()) throw new EmptyCollectionException();
+        return objectList.getLast();
     }
 
-    public int getMax(){
-        return elementsStack.peek();
+    public double getMaxDistance() {
+        if (maxDistance.isEmpty()) throw new EmptyCollectionException();
+        return maxDistance.getLast().distanceFromCenter();
     }
 
-    public int size(){
-        return friendsList.size();
+    public double getMaxAngle() {
+        if (maxAngle.isEmpty()) throw new EmptyCollectionException();
+        return maxAngle.getLast().angleBetweenDistanceAndOX();
     }
 
-    public boolean isEmpty(){
-        return friendsList.isEmpty();
+    public int size() {
+        return objectList.size();
+    }
+
+    public boolean isEmpty() {
+        return objectList.isEmpty();
     }
 }
