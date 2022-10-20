@@ -1,53 +1,53 @@
 package maxElementTests;
 import exceptions.EmptyCollectionException;
 import maxElement.MaxElement;
-import model.Cartesian;
+import model.PointDistance;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class RemoveElementTest {
-   MaxElement fList = new MaxElement();
+    MaxElement<PointDistance> fList = new MaxElement();
     @Test
     public void removeOneElementTest(){
-        fList.addElement(new Cartesian(-3,-4));
-        fList.addElement(new Cartesian(12,-5));
+        fList.addElement(new PointDistance(-3,-4));
+        fList.addElement(new PointDistance(12,-5));
         fList.removeLast();
-        assertEquals(5, fList.getLast().distanceFromCenter(), .000001);
+        assertEquals(25, fList.getLast().distanceFromCenter());
     }
 
     @Test
     public void removeAllElementsTest(){
-        fList.addElement(new Cartesian(-3,-4));
-        fList.addElement(new Cartesian(12,-5));
+        fList.addElement(new PointDistance(-3,-4));
+        fList.addElement(new PointDistance(12,-5));
         fList.removeLast();
         fList.removeLast();
-        Assert.assertTrue(fList.isEmpty());
+        assertEquals(0, fList.size());
     }
 
     @Test
     public void removeAndAddElementTest(){
-        fList.addElement(new Cartesian(-3,-4));
+        fList.addElement(new PointDistance(-3,-4));
         fList.removeLast();
-        fList.addElement(new Cartesian(12,-5));
-        assertEquals(13, fList.getLast().distanceFromCenter(), .000001);
+        fList.addElement(new PointDistance(12,-5));
+        assertEquals(169, fList.getLast().distanceFromCenter());
     }
 
     @Test
     public void removeOneElementNegativeTest(){
-        fList.addElement(new Cartesian(-3,-4));
-        fList.addElement(new Cartesian(12,-5));
+        fList.addElement(new PointDistance(-3,-4));
+        fList.addElement(new PointDistance(12,-5));
         fList.removeLast();
-        assertEquals(5, fList.getLast().distanceFromCenter(), .000001);
+        assertEquals(25, fList.getLast().distanceFromCenter());
     }
 
     @Test
     public void removeNotAllElementsNegativeTest(){
-        fList.addElement(new Cartesian(-3,-4));
-        fList.addElement(new Cartesian(12,-5));
+        fList.addElement(new PointDistance(-3,-4));
+        fList.addElement(new PointDistance(12,-5));
         fList.removeLast();
-        Assert.assertFalse(fList.isEmpty());
+        Assert.assertNotEquals(0, fList.size());
     }
     @Test
     public void RemoveAllEmptyDeque(){

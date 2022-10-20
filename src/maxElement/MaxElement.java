@@ -2,76 +2,63 @@ package maxElement;
 
 
 import exceptions.EmptyCollectionException;
-import model.Cartesian;
 
 import java.util.*;
 
-public class MaxElement {
+public class MaxElement<T>  {
 
     //implement collection
 
-    Deque<Cartesian> objectList;
-    Deque<Cartesian> maxDistance;
-    Deque<Cartesian> maxAngle;
+    Deque<T> objectList;
+    Deque<T> maxValue;
+    Comparator<T> comparator;
+
+
+    public MaxElement(Comparator<T> comparator) {
+        this.objectList = new ArrayDeque<>();
+        this.maxValue = new ArrayDeque<>();
+        this.comparator = comparator;
+    }
 
     public MaxElement() {
         this.objectList = new ArrayDeque<>();
-        this.maxDistance = new ArrayDeque<>();
-        this.maxAngle = new ArrayDeque<>();
+        this.maxValue = new ArrayDeque<>();
     }
 
-    public void addElement(Cartesian cartesian) {
+    public void addElement(T element) {
 
-        if (objectList.isEmpty()) {
-            objectList.addLast(cartesian);
-            maxDistance.addLast(cartesian);
-            maxAngle.addLast(cartesian);
-            return;
-        }
-        objectList.addLast(cartesian);
-
-        if (cartesian.distanceFromCenter() > getMaxDistance()) {
-            maxDistance.addLast(cartesian);
+        if (objectList.size()==0) {
+            maxValue.addLast(element);
         } else {
-            maxDistance.addLast(maxDistance.getLast());
+            T maxNumber = maxValue.getLast();
+            if(comparator!=null && comparator.compare(maxNumber, element) <=0
+            || ((Comparable<T>) maxNumber).compareTo(element) <=0 ){
+                maxValue.addLast(element);
+            }
         }
-
-        if (cartesian.angleBetweenDistanceAndOX() > getMaxAngle()) {
-            maxAngle.addLast(cartesian);
-        } else {
-            maxAngle.addLast(maxAngle.getLast());
-        }
-
+        objectList.addLast(element);
     }
 
 
-    public void removeLast() {
-        if (objectList.isEmpty()) throw new EmptyCollectionException();
-        objectList.removeLast();
-        maxDistance.removeLast();
-        maxAngle.removeLast();
+    public T removeLast() {
+        if (objectList.size() == 0) throw new EmptyCollectionException();
+        T lastNumber = objectList.removeLast();
+        if (lastNumber == maxValue.getLast()) maxValue.removeLast();
+        return lastNumber;
     }
 
-    public Cartesian getLast() {
+    public T getLast() {
         if (objectList.isEmpty()) throw new EmptyCollectionException();
         return objectList.getLast();
     }
 
-    public double getMaxDistance() {
-        if (maxDistance.isEmpty()) throw new EmptyCollectionException();
-        return maxDistance.getLast().distanceFromCenter();
-    }
-
-    public double getMaxAngle() {
-        if (maxAngle.isEmpty()) throw new EmptyCollectionException();
-        return maxAngle.getLast().angleBetweenDistanceAndOX();
+    public T getMaxElement() {
+        if (maxValue.size()==0) throw new EmptyCollectionException();
+        return maxValue.getLast();
     }
 
     public int size() {
         return objectList.size();
     }
 
-    public boolean isEmpty() {
-        return objectList.isEmpty();
-    }
 }
