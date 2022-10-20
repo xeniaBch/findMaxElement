@@ -1,5 +1,6 @@
 package com.telran.bank;
 
+//Sorry, I had no time to make it to the end
 public abstract class Konto {
     private int nummer;
     private Person inhaber;
