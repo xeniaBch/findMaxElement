@@ -1,7 +1,7 @@
-package maxElementTests;
+package com.telran.maxelement.maxElementTests;
 
-import maxElement.MaxElement;
-import model.PointAngle;
+import com.telran.maxelement.maxElement.MaxElement;
+import com.telran.maxelement.model.PointAngle;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

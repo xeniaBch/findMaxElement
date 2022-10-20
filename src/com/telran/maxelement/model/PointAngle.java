@@ -1,4 +1,4 @@
-package model;
+package com.telran.maxelement.model;
 
 
 public class PointAngle implements Comparable<PointAngle> {

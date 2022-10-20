@@ -1,6 +1,6 @@
-package maxElementTests;
-import maxElement.MaxElement;
-import model.PointDistance;
+package com.telran.maxelement.maxElementTests;
+import com.telran.maxelement.maxElement.MaxElement;
+import com.telran.maxelement.model.PointDistance;
 import org.junit.Assert;
 import org.junit.Test;
 

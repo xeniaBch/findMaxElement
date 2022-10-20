@@ -1,4 +1,4 @@
-package model;
+package com.telran.maxelement.model;
 
 
 public class PointDistance implements Comparable<PointDistance>{

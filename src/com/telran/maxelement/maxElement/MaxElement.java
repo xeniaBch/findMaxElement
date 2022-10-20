@@ -1,7 +1,7 @@
-package maxElement;
+package com.telran.maxelement.maxElement;
 
 
-import exceptions.EmptyCollectionException;
+import com.telran.maxelement.exceptions.EmptyCollectionException;
 
 import java.util.*;
 
