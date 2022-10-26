@@ -1,7 +1,7 @@
 package com.telran.bank;
 
 public class Sparkonto extends Konto{
-    private double zinssatz;
+    private static double zinssatz = 0.02;
 
     public Sparkonto(Person inhaber) {
         super(inhaber);

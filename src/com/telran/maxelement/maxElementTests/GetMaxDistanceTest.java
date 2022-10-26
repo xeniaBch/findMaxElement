@@ -1,71 +1,69 @@
 package com.telran.maxelement.maxElementTests;
 import com.telran.maxelement.maxElement.MaxElement;
-import com.telran.maxelement.model.PointDistance;
+import com.telran.maxelement.model.Point;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 public class GetMaxDistanceTest {
-    MaxElement<PointDistance> fList = new MaxElement();
+    MaxElement<Point> fList = new MaxElement();
     @Test
     public void getMaxFromOneElementTest(){
-        fList.addElement(new PointDistance(3,4));
-        assertEquals(25, fList.getMaxElement().distanceFromCenter());
+        Point point = new Point(3,4);
+        fList.addElement(point);
+        assertEquals(point, fList.getMaxElement());
     }
 
     @Test
     public void getMaxFromTwoElementTest(){
-        fList.addElement(new PointDistance(3,4));
-        fList.addElement(new PointDistance(0,9));
-        assertEquals(81, fList.getMaxElement().distanceFromCenter());
+        Point point = new Point(3,4);
+        Point point2 = new Point(0,0);
+        fList.addElement(point);
+        fList.addElement(point2);
+        assertEquals(point, fList.getMaxElement());
     }
 
     @Test
     public void getMaxTwoElementTest(){
-        fList.addElement(new PointDistance(-3,-4));
-        fList.addElement(new PointDistance(0,-25));
-        assertEquals(625, fList.getMaxElement().distanceFromCenter());
+        Point point = new Point(3,4);
+        Point point2 = new Point(-25,0);
+        fList.addElement(point);
+        fList.addElement(point2);
+        assertEquals(point2, fList.getMaxElement());
     }
 
-    @Test
-    public void getMaxFromLisTest(){
-        fList.addElement(new PointDistance(-3,-4));
-        fList.addElement(new PointDistance(0,-25));
-        fList.addElement(new PointDistance(12,5));
-        fList.addElement(new PointDistance(20,21));
-        fList.addElement(new PointDistance(1,0));
-        fList.addElement(new PointDistance(0,10));
-        assertEquals(841, fList.getMaxElement().distanceFromCenter());
-    }
 
     @Test
     public void getMaxFromListAfterRemoveTest(){
-        fList.addElement(new PointDistance(-3,-4));
-        fList.addElement(new PointDistance(12,5));
-        fList.addElement(new PointDistance(20,21));
-        fList.addElement(new PointDistance(1,0));
-        fList.addElement(new PointDistance(0,10));
+        Point point = new Point(3,4);
+        Point point2 = new Point(-25,0);
+        Point point3 = new Point(12,5);
+        Point point4 = new Point(20,21);
+        fList.addElement(point);
+        fList.addElement(point2);
+        fList.addElement(point3);
+        fList.addElement(point4);
         fList.removeLast();
-        assertEquals(841, fList.getMaxElement().distanceFromCenter());
+        assertEquals(point2, fList.getMaxElement());
     }
 
     @Test
     public void getMaxIsNotLastTest(){
-        fList.addElement(new PointDistance(12,5));
-        fList.addElement(new PointDistance(20,21));
-        fList.addElement(new PointDistance(1,0));
-        fList.addElement(new PointDistance(0,10));
-        assertNotEquals(fList.getLast().distanceFromCenter(), fList.getMaxElement().distanceFromCenter());
+        fList.addElement(new Point(12,5));
+        fList.addElement(new Point(20,21));
+        fList.addElement(new Point(1,0));
+        fList.addElement(new Point(0,10));
+        assertNotEquals(fList.getLast(), fList.getMaxElement());
     }
 
     @Test
     public void getMaxIsLastTest(){
-        fList.addElement(new PointDistance(12,5));
-        fList.addElement(new PointDistance(20,21));
-        fList.addElement(new PointDistance(1,0));
+        fList.addElement(new Point(12,5));
+        fList.addElement(new Point(20,21));
+        fList.addElement(new Point(1,0));
         fList.removeLast();
-        assertEquals(fList.getLast().distanceFromCenter(), fList.getMaxElement().distanceFromCenter());
+        assertEquals(fList.getLast(), fList.getMaxElement());
     }
 
 }

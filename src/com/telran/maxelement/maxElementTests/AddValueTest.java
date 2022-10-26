@@ -1,6 +1,6 @@
 package com.telran.maxelement.maxElementTests;
 import com.telran.maxelement.maxElement.MaxElement;
-import com.telran.maxelement.model.PointDistance;
+import com.telran.maxelement.model.Point;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,34 +8,41 @@ import static org.junit.Assert.assertEquals;
 
 public class AddValueTest {
 
-    MaxElement<PointDistance> fList = new MaxElement();
+    MaxElement<Point> fList = new MaxElement();
     @Test
     public void addPositiveNumberPositiveTest(){
-        fList.addElement(new PointDistance(3,4));
-        assertEquals(25, fList.getLast().distanceFromCenter());
+        Point point = new Point(0,0);
+        fList.addElement(point);
+        assertEquals(point, fList.getLast());
     }
 
     @Test
     public void addNegativeNumberPositiveTest(){
-        fList.addElement(new PointDistance(-3,-4));
-        assertEquals(25, fList.getLast().distanceFromCenter());
+        Point point = new Point(-3,-4);
+        fList.addElement(point);
+        assertEquals(point, fList.getLast());
     }
     @Test
     public void addSameNumberPositiveTest(){
-        fList.addElement(new PointDistance(-3,-4));
-        fList.addElement(new PointDistance(-3,-4));
-        assertEquals(25, fList.getLast().distanceFromCenter());
+        Point point = new Point(3,-4);
+        Point point1 = new Point(-3,-4);
+        fList.addElement(point);
+        fList.addElement(point1);
+        assertEquals(point1, fList.getLast());
     }
     @Test
     public void addTwoDifferentElementsPositiveTest(){
-        fList.addElement(new PointDistance(3,-4));
-        fList.addElement(new PointDistance(12,-5));
-        assertEquals(169, fList.getLast().distanceFromCenter());
+        Point point = new Point(3,-4);
+        Point point1 = new Point(20,21);
+        fList.addElement(point);
+        fList.addElement(point1);
+        assertEquals(point1, fList.getLast());
     }
     @Test
     public void addNegativeTest(){
-        fList.addElement(new PointDistance(3,-4));
-        Assert.assertNotEquals(0, fList.getLast().distanceFromCenter());
+        Point point = new Point(-3,-4);
+        fList.addElement(point);
+        Assert.assertNotEquals(0, fList.size());
     }
 
 

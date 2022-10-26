@@ -5,9 +5,7 @@ public abstract class Konto {
     private int nummer;
     private Person inhaber;
     protected double saldo;
-
-    //classificator??
-    private int naechsteNummer;
+    private static int naechsteNummer;
 
     public Konto(Person inhaber) {
         this.inhaber = inhaber;

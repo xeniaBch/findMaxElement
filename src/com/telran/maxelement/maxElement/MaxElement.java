@@ -43,7 +43,10 @@ public class MaxElement<T>  {
     public T removeLast() {
         if (objectList.size() == 0) throw new EmptyCollectionException();
         T lastNumber = objectList.removeLast();
-        if (lastNumber == maxValue.getLast()) maxValue.removeLast();
+        if(comparator!=null && comparator.compare(lastNumber, maxValue.getLast()) ==0
+                || ((Comparable<T>) lastNumber).compareTo(maxValue.getLast()) ==0 ) {
+            maxValue.removeLast();
+        }
         return lastNumber;
     }
 

@@ -5,8 +5,7 @@ public class Person {
     private String vorname;
     private String nachname;
 
-    //classificator??
-    private int naechsteNummer;
+    private static int naechsteNummer;
 
     public Person(String vorname, String nachname) {
         this.vorname = vorname;
