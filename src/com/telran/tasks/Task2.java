@@ -18,7 +18,6 @@ public class Task2 {
                     count[i]++;
                 }
             }
-        System.out.println(Arrays.toString(count));
         int max = count[0];
         for (int i = 1; i < count.length; i++) max = Math.max(max, count[i]);
         return max;
