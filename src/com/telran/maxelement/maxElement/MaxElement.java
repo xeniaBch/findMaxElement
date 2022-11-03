@@ -32,7 +32,7 @@ public class MaxElement<T>  {
         } else {
             T maxNumber = maxValue.getLast();
             if(comparator!=null && comparator.compare(maxNumber, element) <=0
-            || ((Comparable<T>) maxNumber).compareTo(element) <=0 ){
+            || (comparator == null && ((Comparable<T>) maxNumber).compareTo(element) <=0)) {
                 maxValue.addLast(element);
             }
         }
@@ -44,7 +44,7 @@ public class MaxElement<T>  {
         if (objectList.size() == 0) throw new EmptyCollectionException();
         T lastNumber = objectList.removeLast();
         if(comparator!=null && comparator.compare(lastNumber, maxValue.getLast()) ==0
-                || ((Comparable<T>) lastNumber).compareTo(maxValue.getLast()) ==0 ) {
+                || (comparator == null && ((Comparable<T>) lastNumber).compareTo(maxValue.getLast()) ==0 )) {
             maxValue.removeLast();
         }
         return lastNumber;
